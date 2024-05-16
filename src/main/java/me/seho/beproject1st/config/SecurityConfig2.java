@@ -20,7 +20,9 @@ public class SecurityConfig2 {
                                 .requestMatchers(HttpMethod.GET,
                                         "/api/posts/**",
                                         "/api/comments/**",
-                                        "/posts/count/*")
+                                        "/api/posts/count/*",
+                                        "/api/likes/**",
+                                        "/api/set-likes/**")
                                         .permitAll()
                                 .requestMatchers(HttpMethod.POST,
                                         "/api/login/**",
