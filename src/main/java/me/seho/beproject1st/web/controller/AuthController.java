@@ -1,7 +1,7 @@
 package me.seho.beproject1st.web.controller;
 
 import lombok.AllArgsConstructor;
-import me.seho.beproject1st.config.JwtService;
+import me.seho.beproject1st.service.JwtService;
 import me.seho.beproject1st.domain.User;
 import me.seho.beproject1st.service.AuthService;
 import me.seho.beproject1st.web.dto.ResultResponse;

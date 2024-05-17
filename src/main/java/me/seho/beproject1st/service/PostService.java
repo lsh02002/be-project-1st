@@ -61,6 +61,19 @@ public class PostService {
                 .build();
     }
 
+    public PostResponse getPostById(Integer postId){
+        Post post = postRepository.findById(postId).get();
+
+        return PostResponse.builder()
+                .id(post.getPostId())
+                .title(post.getTitle())
+                .content(post.getContent())
+                .author(post.getUser().getEmail())
+                .create_at(post.getCreateAt().toString())
+                .modify_at(post.getModifyAt() != null ? post.getModifyAt().toString() : null)
+                .build();
+    }
+
     public PostsResponse getPostsByUserEmail(String authEmail){
         List<Post> posts = postRepository.findByUserEmail(authEmail);
         List<PostResponse> postResponses = posts.stream()
@@ -80,20 +93,26 @@ public class PostService {
     }
 
     public PostPutResponse modifyPost(AuthInfo authInfo, @PathVariable(value = "post_id") Integer postId, @RequestBody PostPutRequest postPutRequest){
-        User user = userRepository.findById(authInfo.getUserId().intValue()).get();
-        Post post = postRepository.findByUserAndPostId(user, postId);
+        try {
+            User user = userRepository.findById(authInfo.getUserId().intValue()).get();
+            Post post = postRepository.findByUserAndPostId(user, postId);
 
-        post.setPostId(postId);
-        post.setTitle(postPutRequest.getTitle());
-        post.setContent(postPutRequest.getContent());
-        post.setUser(user);
-        post.setModifyAt(LocalDateTime.now());
+            post.setPostId(postId);
+            post.setTitle(postPutRequest.getTitle());
+            post.setContent(postPutRequest.getContent());
+            post.setUser(user);
+            post.setModifyAt(LocalDateTime.now());
 
-        postRepository.save(post);
+            postRepository.save(post);
 
-        return PostPutResponse.builder()
-                .title(post.getTitle())
-                .content(post.getContent())
-                .build();
+            return PostPutResponse.builder()
+                    .title(post.getTitle())
+                    .content(post.getContent())
+                    .build();
+        }catch (RuntimeException e){
+            e.printStackTrace();
+
+            return null;
+        }
     }
 }

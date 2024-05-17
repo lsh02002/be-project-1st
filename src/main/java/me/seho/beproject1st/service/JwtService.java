@@ -1,4 +1,4 @@
-package me.seho.beproject1st.config;
+package me.seho.beproject1st.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
@@ -31,7 +31,7 @@ public class JwtService {
     }
 
     public String encode(Long userId){
-        LocalDateTime expiredAt = LocalDateTime.now().plusHours(3L);
+        LocalDateTime expiredAt = LocalDateTime.now().plusHours(5L);
         Timestamp date = Timestamp.valueOf(expiredAt);
 
         return JWT.create()

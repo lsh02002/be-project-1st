@@ -8,7 +8,6 @@ import me.seho.beproject1st.repository.LikeRepository;
 import me.seho.beproject1st.repository.PostRepository;
 import me.seho.beproject1st.repository.UserRepository;
 import me.seho.beproject1st.web.dto.auth.AuthInfo;
-import me.seho.beproject1st.web.dto.like.LikeRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;

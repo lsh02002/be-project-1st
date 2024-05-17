@@ -50,6 +50,17 @@ public class PostController {
         }
     }
 
+    @GetMapping("/posts/{post_id}")
+    public ResponseEntity<?> getPostByPostId(@PathVariable(value = "post_id") Integer postId){
+        PostResponse postResponse = postService.getPostById(postId);
+
+        if(postResponse != null){
+            return ResponseEntity.ok().body(postResponse);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("검색한 결과가 없습니다.");
+        }
+    }
+
     @GetMapping("/posts/search")
     public ResponseEntity<?> getPostsByUserEmail(@RequestParam("author_email") String authorEmail){
         PostsResponse postsResponse = postService.getPostsByUserEmail(authorEmail);

@@ -1,8 +1,7 @@
 package me.seho.beproject1st.config;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import me.seho.beproject1st.service.JwtService;
 import me.seho.beproject1st.web.dto.auth.AuthInfo;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;

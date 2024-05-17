@@ -20,6 +20,12 @@ public class AuthService {
     public Boolean signup(SignupRequest signupRequest) {
         try {
 
+            Optional<User> user = userRepository.findByEmail(signupRequest.getEmail());
+
+            if(user.isPresent()){
+                throw new RuntimeException("이미 이 이메일의 사용자가 있습니다.");
+            }
+
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
             User userFound = User.builder()
