@@ -1,7 +1,6 @@
 package me.seho.beproject1st.web.controller;
 
 import lombok.RequiredArgsConstructor;
-import me.seho.beproject1st.domain.User;
 import me.seho.beproject1st.service.PostService;
 import me.seho.beproject1st.web.dto.ResultResponse;
 import me.seho.beproject1st.web.dto.auth.AuthInfo;
@@ -9,8 +8,6 @@ import me.seho.beproject1st.web.dto.post.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api")

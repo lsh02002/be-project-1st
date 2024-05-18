@@ -58,6 +58,7 @@ public class AuthController {
         headers.set("Authorization", token);
 
         loginResponse = LoginResponse.builder()
+                .email(user.get().getEmail())
                 .message("로그인이 성공적으로 완료되었습니다.").build();
 
         return ResponseEntity.status(HttpStatus.OK).headers(headers).body(loginResponse);

@@ -18,11 +18,14 @@ public class SecurityConfig2 {
                 .authorizeHttpRequests((auth)->
                         auth
                                 .requestMatchers(HttpMethod.GET,
+                                        "/api/posts/count/**",
+                                        "/api/posts/search**",
                                         "/api/posts/**",
                                         "/api/comments/**",
-                                        "/api/posts/count/*",
                                         "/api/likes/**",
-                                        "/api/set-likes/**")
+                                        "/api/set-likes/**",
+                                        "/swagger-ui/**",
+                                        "/v3/api-docs/**")
                                         .permitAll()
                                 .requestMatchers(HttpMethod.POST,
                                         "/api/login/**",

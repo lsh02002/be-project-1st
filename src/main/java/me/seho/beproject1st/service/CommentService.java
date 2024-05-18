@@ -91,8 +91,8 @@ public class CommentService {
         }
     }
 
-    public Integer getCommentCountByPost(Integer postid){
-        Post post = postRepository.findById(postid).get();
+    public Integer getCommentCountByPost(Integer postId){
+        Post post = postRepository.findById(postId).get();
 
         return commentRepository.countByPost(post);
     }

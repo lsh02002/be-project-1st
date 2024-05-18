@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Builder
 public class User {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer id;
 

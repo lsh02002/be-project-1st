@@ -12,7 +12,7 @@ import lombok.*;
 @Builder
 public class Likes {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne
