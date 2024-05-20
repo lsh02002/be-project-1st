@@ -24,6 +24,8 @@ public class SecurityConfig2 {
                                         "/api/comments/**",
                                         "/api/likes/**",
                                         "/api/set-likes/**",
+                                        "/api/comments-by-user-email/**",
+                                        "/api/get-likes-by-user-id/**",
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**")
                                         .permitAll()

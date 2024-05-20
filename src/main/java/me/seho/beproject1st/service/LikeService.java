@@ -8,9 +8,14 @@ import me.seho.beproject1st.repository.LikeRepository;
 import me.seho.beproject1st.repository.PostRepository;
 import me.seho.beproject1st.repository.UserRepository;
 import me.seho.beproject1st.web.dto.auth.AuthInfo;
+import me.seho.beproject1st.web.dto.post.PostResponse;
+import me.seho.beproject1st.web.dto.post.PostsResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -18,6 +23,7 @@ public class LikeService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
     private final LikeRepository likeRepository;
+    private final CommentService commentService;
     public Integer getLikesCount(@PathVariable(value = "post_id") Integer postId) {
         Post post = postRepository.findById(postId).get();
 
@@ -50,5 +56,30 @@ public class LikeService {
 
             return 0;
         }
+    }
+
+    public PostsResponse getLikesByUserId(Integer userId){
+        List<Likes> likes = likeRepository.findByUserId(userId);
+        List<PostResponse> postResponses = new ArrayList<>();
+
+        for(Likes like : likes) {
+            Post post = like.getPost();
+            PostResponse postResponse = PostResponse.builder()
+                            .id(post.getPostId())
+                            .title(post.getTitle())
+                            .content(post.getContent())
+                            .author(post.getUser().getEmail())
+                            .create_at(post.getCreateAt().toString())
+                            .modify_at(post.getModifyAt() != null ? post.getModifyAt().toString() : null)
+                            .count(commentService.getCommentCountByPost(post.getPostId()))
+                            .build();
+
+            postResponses.add(postResponse);
+        }
+
+        return PostsResponse.builder()
+                .posts(postResponses)
+                .build();
+
     }
 }

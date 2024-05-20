@@ -49,6 +49,17 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("댓글이 없습니다");
     }
 
+    @GetMapping("/comments-by-user-email/{user_email}")
+    public ResponseEntity<?> getCommentsByUserEmail(@PathVariable(value = "user_email") String userEmail){
+        CommentsResponse commentsResponse = commentService.getCommentsByUserEmail(userEmail);
+
+        if(commentsResponse != null){
+            return ResponseEntity.ok().body(commentsResponse);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("댓글이 없습니다");
+    }
+
     @PutMapping("/comments/{comment_id}")
     public ResponseEntity<?> modifyComment(AuthInfo authInfo, @PathVariable(value = "comment_id") Integer id, @RequestBody CommentPutRequest commentPutRequest){
 

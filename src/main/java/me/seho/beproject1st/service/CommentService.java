@@ -71,6 +71,23 @@ public class CommentService {
                 .build();
     }
 
+    public CommentsResponse getCommentsByUserEmail(String userEmail){
+        List<Comment> comments = commentRepository.findByUserEmail(userEmail);
+
+        List<CommentResponse> commentResponses = comments.stream()
+                .map(commentResponse -> CommentResponse.builder()
+                        .id(commentResponse.getId())
+                        .content(commentResponse.getContent())
+                        .author(commentResponse.getUser().getEmail())
+                        .post_id(commentResponse.getPost().getPostId().toString())
+                        .create_at(commentResponse.getCreateAt().toString())
+                        .build()).toList();
+
+        return CommentsResponse.builder()
+                .comments(commentResponses)
+                .build();
+    }
+
     public Boolean modifyComment(AuthInfo authInfo, Integer id, CommentPutRequest commentPutRequest){
         try {
             Comment comment = commentRepository.findById(id).get();
