@@ -21,6 +21,7 @@ public class SecurityConfig2 {
                                         "/api/posts/count/**",
                                         "/api/posts/search**",
                                         "/api/posts/**",
+                                        "/api/get-post/**",
                                         "/api/comments/**",
                                         "/api/likes/**",
                                         "/api/set-likes/**",

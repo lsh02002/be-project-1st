@@ -47,7 +47,7 @@ public class PostController {
         }
     }
 
-    @GetMapping("/posts/{post_id}")
+    @GetMapping("/get-post/{post_id}")
     public ResponseEntity<?> getPostByPostId(@PathVariable(value = "post_id") Integer postId){
         PostResponse postResponse = postService.getPostById(postId);
 

@@ -84,6 +84,7 @@ public class PostService {
                         .author(post.getUser().getEmail())
                         .create_at(post.getCreateAt().toString())
                         .modify_at(post.getModifyAt() != null ? post.getModifyAt().toString() : null)
+                        .count(commentService.getCommentCountByPost(post.getPostId()))
                         .build())
                 .toList();
 
